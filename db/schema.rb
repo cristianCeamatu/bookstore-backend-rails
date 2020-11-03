@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,40 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_201_103_083_103) do
-  create_table 'book_categories', force: :cascade do |t|
-    t.integer 'book_id', null: false
-    t.integer 'category_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['book_id'], name: 'index_book_categories_on_book_id'
-    t.index ['category_id'], name: 'index_book_categories_on_category_id'
+ActiveRecord::Schema.define(version: 2020_11_03_083103) do
+
+  create_table "book_categories", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_book_categories_on_book_id"
+    t.index ["category_id"], name: "index_book_categories_on_category_id"
   end
 
-  create_table 'books', force: :cascade do |t|
-    t.string 'title', limit: 40, null: false
-    t.string 'author', limit: 40, null: false
-    t.integer 'percent', limit: 100
-    t.integer 'current_chapter'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "books", force: :cascade do |t|
+    t.string "title", limit: 40, null: false
+    t.string "author", limit: 40, null: false
+    t.integer "percent"
+    t.integer "current_chapter"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'categories', force: :cascade do |t|
-    t.string 'title', limit: 40, null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "categories", force: :cascade do |t|
+    t.string "title", limit: 40, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'comments', force: :cascade do |t|
-    t.text 'text'
-    t.integer 'book_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['book_id'], name: 'index_comments_on_book_id'
+  create_table "comments", force: :cascade do |t|
+    t.text "text"
+    t.integer "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_comments_on_book_id"
   end
 
-  add_foreign_key 'book_categories', 'books'
-  add_foreign_key 'book_categories', 'categories'
-  add_foreign_key 'comments', 'books'
+  add_foreign_key "book_categories", "books"
+  add_foreign_key "book_categories", "categories"
+  add_foreign_key "comments", "books"
 end
