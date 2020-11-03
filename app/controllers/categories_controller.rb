@@ -38,6 +38,8 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   def destroy
     @category.destroy
+
+    render json: @category
   end
 
   private

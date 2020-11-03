@@ -7,12 +7,12 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
 
-    render json: @books
+    render json: @books.to_json(include: %i[comments categories])
   end
 
   # GET /books/1
   def show
-    render json: @book
+    render json: @book.to_json(include: %i[comments categories])
   end
 
   # POST /books
@@ -20,7 +20,8 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
 
     if @book.save
-      render json: @book, status: :created, location: @book
+      @book.append_categories(categories_params) unless categories_params.empty?
+      render json: @book.to_json(include: %i[categories]), status: :created, location: @book
     else
       render json: @book.errors, status: :unprocessable_entity
     end
@@ -29,7 +30,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   def update
     if @book.update(book_params)
-      render json: @book
+      render json: @book.to_json(include: %i[categories])
     else
       render json: @book.errors, status: :unprocessable_entity
     end
@@ -38,6 +39,8 @@ class BooksController < ApplicationController
   # DELETE /books/1
   def destroy
     @book.destroy
+
+    render json: @book
   end
 
   private
@@ -49,6 +52,10 @@ class BooksController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def book_params
-    params.require(:book).permit(:title, :author, :percent, :current_chapter)
+    params.require(:book).permit(:title, :author, :percent, :current_chapter, :categories)
+  end
+
+  def categories_params
+    params.required(:categories)
   end
 end
