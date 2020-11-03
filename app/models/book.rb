@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Book < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :book_categories, dependent: :destroy, foreign_key: 'book_id'
