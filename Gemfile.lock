@@ -89,6 +89,7 @@ GEM
     parallel (1.19.2)
     parser (2.7.2.0)
       ast (~> 2.4.1)
+    pg (0.18.4-x64-mingw32)
     puma (4.3.6)
       nio4r (~> 2.0)
     rack (2.2.3)
@@ -159,6 +160,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   hirb
+  pg (~> 0.18.4)
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.3)
   rubocop (~> 0.81.0)
