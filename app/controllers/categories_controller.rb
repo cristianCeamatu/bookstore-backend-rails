@@ -15,7 +15,7 @@ class CategoriesController < ApplicationController
 
   # POST /categories
   def create
-    @category = Category.new(category_params)
+    @category = Category.find_or_initialize_by(category_params)
 
     if @category.save
       render json: @category, status: :created, location: @category
