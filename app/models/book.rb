@@ -7,7 +7,7 @@ class Book < ApplicationRecord
   
   validates :category, presence: true, length: { minimum: 2, maximum: 40 }
 
-  validates :current_chapter, allow_blank: true, numericality: { only_integer: true }
+  validates :current_chapter, allow_blank: true, length: { minimum: 1, maximum: 3 }
 
-  validates :percent, presence: true, numericality: { less_than_or_equal_to: 100, only_integer: true }
+  validates :percent, presence: true, length: { minimum: 1, maximum: 3 }
 end
