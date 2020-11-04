@@ -22,7 +22,7 @@ class BooksController < ApplicationController
 
     if @book.save
 
-      render json: @book, status: :created, location: @book
+      render json: @book.to_json(include: %i[comments]), status: :created, location: @book
 
     else
 
